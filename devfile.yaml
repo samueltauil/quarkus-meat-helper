@@ -67,3 +67,4 @@ commands:
 events:
   postStart:
     - init-compile
+    - dev-run
