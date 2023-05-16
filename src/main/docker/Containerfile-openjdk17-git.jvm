@@ -1,0 +1,8 @@
+FROM registry.access.redhat.com/ubi8/openjdk-17
+
+USER root
+
+RUN microdnf install -y git && \
+    microdnf clean all
+
+USER 1001
