@@ -1,5 +1,6 @@
 # Quarkus Meat Helper demo application
 
+
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
@@ -19,6 +20,7 @@ The application can be packaged using:
 ```shell script
 ./mvnw package
 ```
+
 It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
 Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
 
