@@ -1,4 +1,4 @@
-# quarkus-meat-helper
+# Quarkus Meat Helper demo application
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
