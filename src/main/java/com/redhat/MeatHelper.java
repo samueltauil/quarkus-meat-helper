@@ -43,7 +43,7 @@ public class MeatHelper {
                         temperature = 140;
                         break;
                     case "medium":
-                        temperature = 155;
+                        temperature = 160;
                         break;
                     case "medium-well":
                         temperature = 165;
