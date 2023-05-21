@@ -17,7 +17,7 @@ import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
     info = @Info(
         title = "Meat Temperature API",
         version = "1.0.0",
-        description = "An API that provides recommended cooking temperatures for various types of meat!"
+        description = "An API that provides recommended cooking temperatures for various types of meat"
     )
 )
 @Path("/meat")
