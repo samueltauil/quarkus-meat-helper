@@ -16,8 +16,6 @@ import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Tags;
 import io.micrometer.core.instrument.config.MeterFilter;
-
-
 @ApplicationScoped
 @OpenAPIDefinition(
     info = @Info(
@@ -27,11 +25,10 @@ import io.micrometer.core.instrument.config.MeterFilter;
     )
 )
 @Path("/meat")
-public class MeatHelper {
-    
+public class MeatHelper { 
     @Inject
     MeterRegistry registry;
-    
+
     @GET
     @Path("/{meat}/{doneness}")
     @Produces(MediaType.TEXT_PLAIN)
