@@ -7,21 +7,27 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
+import jakarta.inject.Inject;
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Tags;
+import io.micrometer.core.instrument.config.MeterFilter;
 @ApplicationScoped
 @OpenAPIDefinition(
     info = @Info(
         title = "Meat Temperature API",
         version = "1.0.0",
-        description = "An API that provides recommended cooking temperatures for various types of meat!"
+        description = "An API that provides recommended cooking temperatures for various types of meat"
     )
 )
 @Path("/meat")
-public class MeatHelper {
+public class MeatHelper { 
+    @Inject
+    MeterRegistry registry;
 
     @GET
     @Path("/{meat}/{doneness}")
@@ -32,6 +38,8 @@ public class MeatHelper {
         @Parameter(description = "The desired level of doneness (e.g. 'rare', 'medium', 'well-done')") @PathParam("doneness") String doneness) {
 
         int temperature = 0;
+        registry.config()
+        .meterFilter(MeterFilter.acceptNameStartsWith("http_server_"));
 
         switch (meat.toLowerCase()) {
             case "beef":
@@ -127,6 +135,7 @@ public class MeatHelper {
             default:
                 return "Unknown meat: " + meat;
         }
+        registry.counter("temperature check counter", Tags.of("meat", meat)).increment();
 
         return String.format("Recommended temperature for %s %s: %d°F", meat, doneness, temperature);
     }
