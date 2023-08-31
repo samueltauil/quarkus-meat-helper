@@ -37,7 +37,7 @@ public class MeatHelper {
             case "beef":
                 switch (doneness.toLowerCase()) {
                     case "rare":
-                        temperature = 130;
+                        temperature = 135;
                         break;
                     case "medium-rare":
                         temperature = 140;
