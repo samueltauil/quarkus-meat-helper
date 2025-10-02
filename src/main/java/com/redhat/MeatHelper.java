@@ -31,12 +31,13 @@ public class MeatHelper {
      * @return A string message with the recommended temperature in degrees Fahrenheit.
      */
     @GET
-    @Path("/{meat}/{doneness}")
+    @Path("/{meat}/{doneness}/{cut}")
     @Produces(MediaType.TEXT_PLAIN)
     @Operation(summary = "Get recommended temperature for cooking meat", description = "Returns the recommended temperature in degrees Fahrenheit for cooking a particular type of meat to a specified level of doneness.")
     public String getTemperature(
         @Parameter(description = "The type of meat to cook (e.g. 'beef', 'chicken', 'pork')") @PathParam("meat") String meat,
-        @Parameter(description = "The desired level of doneness (e.g. 'rare', 'medium', 'well-done')") @PathParam("doneness") String doneness) {
+        @Parameter(description = "The desired level of doneness (e.g. 'rare', 'medium', 'well-done')") @PathParam("doneness") String doneness,
+        @Parameter(description = "The cut of meat (e.g. 'thighs', 'breast')") @PathParam("cut") String cut) {
 
         int temperature = 0;
 
