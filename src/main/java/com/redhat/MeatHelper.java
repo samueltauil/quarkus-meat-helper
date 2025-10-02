@@ -22,7 +22,14 @@ import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 )
 @Path("/meat")
 public class MeatHelper {
-
+    
+    /**
+     * Get the recommended cooking temperature for a given type of meat and doneness level.
+     *
+     * @param meat    The type of meat (e.g., "beef", "chicken", "pork").
+     * @param doneness The desired level of doneness (e.g., "rare", "medium", "well-done").
+     * @return A string message with the recommended temperature in degrees Fahrenheit.
+     */
     @GET
     @Path("/{meat}/{doneness}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -56,15 +63,29 @@ public class MeatHelper {
                 }
                 break;
             case "chicken":
-                switch (doneness.toLowerCase()) {
-                    case "breasts":
-                        temperature = 165;
-                        break;
-                    case "thighs":
-                        temperature = 170;
-                        break;
-                    default:
-                        return "Unknown doneness for chicken: " + doneness;
+                // If a cut is specified, provide specific recommendations
+                if (cut != null && !cut.isEmpty()) {
+                    switch (cut.toLowerCase()) {
+                        case "thighs":
+                            temperature = 175; // USDA recommends 175°F for chicken thighs
+                            break;
+                        case "breast":
+                            temperature = 165;
+                            break;
+                        default:
+                            return "Unknown cut for chicken: " + cut;
+                    }
+                } else {
+                    switch (doneness.toLowerCase()) {
+                        case "medium":
+                            temperature = 165;
+                            break;
+                        case "well-done":
+                            temperature = 170;
+                            break;
+                        default:
+                            return "Unknown doneness for chicken: " + doneness;
+                    }
                 }
                 break;
             case "pork":
